@@ -26,9 +26,13 @@ class _PokemonCardState extends State<PokemonCard> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.pushNamed(context, pokemonScreen, arguments: {
-        "Pokemon": widget.pokemon,
-      }),
+      onTap: () {
+        if (!widget.pokemon.isLoadingAssets && !widget.pokemon.failedLoading) {
+          Navigator.pushNamed(context, pokemonScreen, arguments: {
+            "Pokemon": widget.pokemon,
+          });
+        }
+      },
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(
